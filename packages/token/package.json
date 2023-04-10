@@ -1,0 +1,13 @@
+{
+  "name": "@threedfish/token",
+  "version": "3.1.5",
+  "description": "token",
+  "main": "./dist/token.js",
+  "types": "./dist/token.d.ts",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT"
+}

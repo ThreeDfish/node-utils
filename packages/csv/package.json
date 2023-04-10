@@ -1,0 +1,14 @@
+{
+  "name": "@threedfish/csv",
+  "version": "3.1.5",
+  "description": "csv",
+  "main": "./dist/csv.js",
+  "dependencies": {
+	"@threedfish/queue": "^3.1.5",
+	"@threedfish/tmp": "^3.1.5"},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT"
+}

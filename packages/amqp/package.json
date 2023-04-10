@@ -1,0 +1,15 @@
+{
+  "name": "@threedfish/amqp",
+  "version": "3.1.5",
+  "description": "amqp",
+  "main": "./dist/amqp.js",
+  "types": "./dist/amqp.d.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@threedfish/array": "^3.1.5"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "name": "@threedfish/base64",
+  "version": "3.1.5",
+  "description": "base64",
+  "main": "./dist/base64.js",
+  "types": "./dist/base64.d.ts",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT"
+}

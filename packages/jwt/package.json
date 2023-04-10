@@ -1,0 +1,13 @@
+{
+  "name": "@threedfish/jwt",
+  "version": "3.1.5",
+  "description": "jwt",
+  "main": "./dist/jwt.js",
+  "types": "./dist/jwt.d.ts",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT"
+}

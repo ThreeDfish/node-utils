@@ -1,0 +1,15 @@
+{
+  "name": "@threedfish/formdata",
+  "version": "3.1.5",
+  "description": "formdata",
+  "main": "./dist/formdata.js",
+  "types": "./dist/formdata.d.ts",
+  "dependencies": {
+	"@threedfish/array": "^3.1.5",
+	"@threedfish/tmp": "^3.1.5"},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT"
+}

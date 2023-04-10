@@ -1,0 +1,13 @@
+{
+  "name": "@threedfish/tmp",
+  "version": "3.1.5",
+  "description": "tmp",
+  "main": "./dist/tmp.js",
+  "types": "./dist/tmp.d.ts",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT"
+}
