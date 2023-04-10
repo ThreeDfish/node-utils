@@ -1,13 +1,11 @@
 /***
-description: number utitlies
+description: number utilities
 version: 2.0.5
 keywords:
-    - number utitlies
+    - number utilities
     - round
 example: |
-    import { round } from '@coolgk/number';
-    // OR
-    // const { round } = require('@coolgk/number');
+    import { round } from '@threedfish/number';
 
     console.log(round(1.3923, 2)); // 1.39
     console.log(round(100, 2)); // 100

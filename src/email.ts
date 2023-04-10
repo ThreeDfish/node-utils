@@ -7,13 +7,11 @@ keywords:
 dependencies:
     "mime-types": "^2.1.18"
     "emailjs": "^2.0.0"
-    "@coolgk/string": "^2"
-    "@coolgk/array": "^2"
+    "@threedfish/string": "^3.1.5"
+    "@threedfish/array": "^3.1.5"
     "@types/mime-types": "^2.1.0"
 example: |
-    import { Email } from '@coolgk/email';
-    // OR
-    // const { Email } = require('@coolgk/email');
+    import { Email } from '@threedfish/email';
 
     const email = new Email({host: 'localhost'});
 
@@ -59,8 +57,8 @@ example: |
 import emailjs = require('emailjs');
 import { lookup } from 'mime-types';
 import { basename } from 'path';
-import { stripTags } from '@coolgk/string';
-import { toArray } from '@coolgk/array';
+import { stripTags } from '@threedfish/string';
+import { toArray } from '@threedfish/array';
 
 export interface IEmailOptions {
     host: string;
@@ -81,7 +79,7 @@ export interface IEmailClient {
 
 export interface IEmailConfigWithClient {
     emailClient: IEmailClient; // DI for test
-    stripTags?: typeof stripTags; // DI for test, from @coolgk/stripTags.js
+    stripTags?: typeof stripTags; // DI for test, from @threedfish/stripTags.js
     getMimeType?: typeof lookup; // DI for test
 }
 
@@ -111,7 +109,7 @@ export interface ISendOptions {
 
 export class Email {
     private _emailClient: IEmailClient;
-    private _stripTags: typeof stripTags; // DI for test, from @coolgk/stripTags.js
+    private _stripTags: typeof stripTags; // DI for test, from @threedfish/stripTags.js
     private _getMimeType: typeof lookup;
 
     /**

@@ -14,9 +14,7 @@ keywords:
     - limiter
     - async function limiter
 example: |
-    import { queue } from '@coolgk/queue';
-    // OR
-    // const { queue } = require('@coolgk/queue');
+    import { queue } from '@threedfish/queue';
 
     function a (x) {
         console.log('start a');

@@ -17,7 +17,7 @@ documentation: |
     ```javascript
     // express middleware
     const app = require('express')();
-    const formdata = require('@coolgk/formdata');
+    const formdata = require('@theedfish/formdata');
 
     app.use(formdata.express());
 
@@ -34,7 +34,7 @@ documentation: |
                 // "fieldname": "id",
                 // "filename": "test.txt",
                 // "encoding": "7bit",
-                // "mimetype": "text/plain",
+                // "mimeType": "text/plain",
                 // "size": 13,
                 // "path": "/tmp/151605931497716067xZGgxPUdNvoj"
             // }
@@ -55,7 +55,7 @@ documentation: |
                     // "fieldname": "photo",
                     // "filename": "test.png",
                     // "encoding": "7bit",
-                    // "mimetype": "image/png",
+                    // "mimeType": "image/png",
                     // "size": 604,
                     // "path": "/tmp/151605931497716067xZGgxPUdNvoj"
                 // },
@@ -64,7 +64,7 @@ documentation: |
                     // "fieldname": "photo",
                     // "filename": "test.svg",
                     // "encoding": "7bit",
-                    // "mimetype": "image/svg+xml",
+                    // "mimeType": "image/svg+xml",
                     // "size": 2484,
                     // "path": "/tmp/151605931497916067EAUAa3yB4q42"
                 // }
@@ -74,7 +74,7 @@ documentation: |
                 // "fieldname": "id",
                 // "filename": "test.txt",
                 // "encoding": "7bit",
-                // "mimetype": "text/plain",
+                // "mimeType": "text/plain",
                 // "size": 13,
                 // "path": "/tmp/151605931498016067zqZe6dlhidQ5"
             // }
@@ -109,7 +109,7 @@ documentation: |
                     // "fieldname": "photo",
                     // "filename": "test.png",
                     // "encoding": "7bit",
-                    // "mimetype": "image/png",
+                    // "mimeType": "image/png",
                     // "size": 604,
                     // "path": "/tmp/151605931497716067xZGgxPUdNvoj"
                 // },
@@ -118,7 +118,7 @@ documentation: |
                     // "fieldname": "photo",
                     // "filename": "test.svg",
                     // "encoding": "7bit",
-                    // "mimetype": "image/svg+xml",
+                    // "mimeType": "image/svg+xml",
                     // "size": 2484,
                     // "path": "/tmp/151605931497916067EAUAa3yB4q42"
                 // }
@@ -128,7 +128,7 @@ documentation: |
                 // "fieldname": "id",
                 // "filename": "test.txt",
                 // "encoding": "7bit",
-                // "mimetype": "text/plain",
+                // "mimeType": "text/plain",
                 // "size": 13,
                 // "path": "/tmp/151605931498016067zqZe6dlhidQ5"
             // }
@@ -151,8 +151,8 @@ keywords:
     - file
     - upload
 dependencies:
-    "@coolgk/array": "^2"
-    "@coolgk/tmp": "^2"
+    "@threedfish/array": "^2"
+    "@threedfish/tmp": "^2"
     "busboy": "^0.2.14"
     "@types/busboy": "^0.2.3"
     "@types/node": "^9"
@@ -168,10 +168,10 @@ dependencies:
 // other parsers have strange api
 
 import { tmpdir } from 'os';
-import * as Busboy from 'busboy';
+import Busboy from 'busboy';
 import { createWriteStream, stat } from 'fs';
-import { generateFile } from '@coolgk/tmp';
-import { toArray } from '@coolgk/array';
+import { generateFile } from '@threedfish/tmp';
+import { toArray } from '@threedfish/array';
 import { parse as qsParse } from 'querystring';
 import { IncomingMessage, ServerResponse } from 'http';
 
@@ -225,7 +225,7 @@ export interface IFile {
     fieldname: string;
     filename: string;
     encoding: string;
-    mimetype: string;
+    mimeType: string;
     size: number;
     path: string;
     remove: () => void;
@@ -239,7 +239,7 @@ interface IBusboyFileStream extends NodeJS.ReadableStream {
     truncated: boolean;
 }
 
-// for assigngin property to request
+// for assigning property to request
 export interface IRequest extends IncomingMessage {
     [key: string]: any;
 }
@@ -268,7 +268,7 @@ export interface IRequest extends IncomingMessage {
  * @param {string} [options.limits.parts=Infinity] - the max number of parts (fields + files) (Default: Infinity), 'multipart/form-data' only
  * @param {string} [options.limits.headerPairs=2000] - For multipart forms, the max number of header key=>value pairs to parse Default: 2000 (same as node's http)
  * @param {string} [options.limits.postSize=1024000] - the max number of bytes can be posted. For application/json & application/x-www-form-urlencoded only
- * @return {promise<{}>} - { fieldname: value, uploadedFileName: { error: ..., fieldname: ..., filename: ..., encoding: ..., mimetype: ..., size: ..., path: ..., remove: () => void } } "remove" is a callback function for deleting the uploaded file
+ * @return {promise<{}>} - { fieldname: value, uploadedFileName: { error: ..., fieldname: ..., filename: ..., encoding: ..., mimeType: ..., size: ..., path: ..., remove: () => void } } "remove" is a callback function for deleting the uploaded file
  */
 /* tslint:enable */
 export function getFormData (
@@ -339,11 +339,11 @@ export function getFormData (
                 }
             });
         } else if (contentType.indexOf('multipart/form-data') === 0) {
-            const busboy = new Busboy({ headers: request.headers, limits: options.limits });
+            const busboy = Busboy({ headers: request.headers, limits: options.limits });
             const promises: Promise<IFile>[] = [];
 
             if (options.fileFieldNames) {
-                busboy.on('file', async (fieldname, fileStream, filename, encoding, mimetype) => {
+                busboy.on('file', async (fieldname:string, fileStream, {filename, encoding, mimeType}) => {
                     if (toArray(options.fileFieldNames).includes(fieldname)) {
                         const { path, cleanupCallback } = await generateFile({
                             dir,
@@ -357,14 +357,14 @@ export function getFormData (
                             fieldname,
                             filename,
                             encoding,
-                            mimetype,
+                            mimeType,
                             size: 0,
                             path,
                             remove: cleanupCallback
                         };
 
                         fileStream.on('end', () => {
-                            if ((fileStream as IBusboyFileStream).truncated) {
+                            if ((fileStream as unknown as IBusboyFileStream).truncated) {
                                 file.error = FormDataError.FILE_SIZE_EXCEEDED_LIMIT;
                             }
                         });
@@ -372,7 +372,7 @@ export function getFormData (
                         promises.push(new Promise((done, rejectFile) => {
                             fileStream.pipe(createWriteStream(path)).on('finish', () => {
                                 stat(path, (error, stats) => {
-                                    done({error, ...file, size: stats.size});
+                                    done({error: error === null ? undefined : error, ...file, size: stats.size});
                                 });
                             });
                         }));
@@ -383,9 +383,9 @@ export function getFormData (
             }
 
             const data: IFormData = {};
-            busboy.on('field', (fieldname, value, fieldnameTruncated, valueTruncated) => {
+            busboy.on('field', (fieldname:string, value:string, {nameTruncated, valueTruncated}) => {
                 if (options.alwaysReject) {
-                    // if (fieldnameTruncated) {
+                    // if (nameTruncated) {
                         // return reject(FormDataError.FIELD_NAME_SIZE_EXCEEDED_LIMIT);
                     // }
                     if (valueTruncated) {

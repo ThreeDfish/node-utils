@@ -12,12 +12,12 @@ dependencies:
     "@types/csv-stringify": "^1.4.2"
     "csv-parse": "^2.2"
     "csv-stringify": "^2.1"
-    "@coolgk/queue": "^2"
-    "@coolgk/tmp": "^2"
+    "@threedfish/queue": "^2"
+    "@threedfish/tmp": "^2"
 example: |
-    import { Csv } from '@coolgk/csv';
+    import { Csv } from '@threedfish/csv';
     // OR
-    // const { Csv } = require('@coolgk/csv');
+    // const { Csv } = require('@threedfish/csv');
 
     const csv = new Csv({
         tmpConfig: { dir: '/tmp/csv' } // optional
@@ -103,12 +103,12 @@ example: |
 
 // npm i -S csv-stringify @types/csv-stringify csv-parse @types/csv-parse @types/mongodb
 
-import csvParse = require('csv-parse');
-import csvStringify = require('csv-stringify');
-import { queue } from '@coolgk/queue';
-import { generateFile, ITmpConfig } from '@coolgk/tmp';
+import { parse as csvParse } from 'csv-parse';
+import { stringify as csvStringify} from 'csv-stringify';
+import { queue } from '@threedfish/queue';
+import { generateFile, ITmpConfig } from '@threedfish/tmp';
 import { createReadStream, createWriteStream, WriteStream } from 'fs';
-import { Cursor } from 'mongodb';
+import { FindCursor as Cursor } from 'mongodb';
 
 export interface ICsvConfig {
     readonly generateFile?: typeof generateFile; // DI for test
@@ -219,52 +219,55 @@ export class Csv {
      * @return {promise<string>} - file path of the csv file generated
      */
     /* tslint:enable */
-    public createFile (data: any[] | Cursor, options: ICsvWriteConfig = {}): Promise<string> {
-        return (options.filepath
-            ? Promise.resolve({ path: options.filepath })
-            : this._generateFile({
-                  ...this._tmpConfig,
-                  keep: true,
-                  postfix: '.csv'
-              })
-        ).then(({ path }) => {
-            const fileStream = createWriteStream(path);
-            const fileStreamPromise = new Promise((resolve, reject) => {
-                fileStream.on('error', (error) => {
-                    reject(error);
-                });
-                fileStream.on('finish', () => {
-                    resolve();
-                });
-            });
 
-            return (options.columns
-                ? this._writeCsvStream(fileStream, options.columns, options, true)
-                : Promise.resolve()
-            )
-                .then(
-                    () =>
-                        new Promise((resolve, reject) => {
-                            if (data instanceof Array) {
-                                resolve(Promise.all(data.map((row) => this._writeCsvStream(fileStream, row, options))));
-                            } else {
-                                const promises: Promise<any>[] = [];
-                                data.forEach(
-                                    (row) => promises.push(this._writeCsvStream(fileStream, row, options)),
-                                    () => resolve(Promise.all(promises))
-                                );
-                            }
-                        })
-                )
-                .then(
-                    () =>
-                        new Promise((resolve, reject) => {
-                            fileStream.end(() => resolve(fileStreamPromise));
-                        })
-                )
-                .then(() => path);
-        });
-    }
+    public createFile(data: any[] | Cursor, options: ICsvWriteConfig = {}): Promise<string> {
+		return (options.filepath
+			? Promise.resolve({ path: options.filepath })
+			: this._generateFile({
+				...this._tmpConfig,
+				keep: true,
+				postfix: '.csv'
+			})
+		).then(({ path }) => {
+			const fileStream = createWriteStream(path);
+			const fileStreamPromise = new Promise<void>((resolve, reject) => {
+				fileStream.on('error', (error) => {
+					reject(error);
+				});
+				fileStream.on('finish', () => {
+					resolve();
+				});
+			});
+
+			return (options.columns
+				? this._writeCsvStream(fileStream, options.columns, options, true)
+				: Promise.resolve()
+			)
+				.then(
+					() =>
+						new Promise(async (resolve, reject) => {
+							if (data instanceof Array) {
+								resolve(Promise.all(data.map((row) => this._writeCsvStream(fileStream, row, options))));
+							} else {
+								const promises: Promise<any>[] = [];
+								let row;
+								while ((row = await data.next())) {
+									promises.push(this._writeCsvStream(fileStream, row, options));
+								}
+								resolve(Promise.all(promises));
+							}
+						})
+				)
+				.then(
+					() =>
+						new Promise((resolve, reject) => {
+							fileStream.end(() => resolve(fileStreamPromise));
+						})
+				)
+				.then(() => path);
+		});
+	}
+
 
     /* tslint:disable */
     /**
@@ -285,10 +288,10 @@ export class Csv {
         options: ICsvWriteConfig,
         isHeader: boolean = false
     ): Promise<void> {
-        // write onece at a time
+        // write one at a time
         return queue(
             () =>
-                new Promise((resolve, reject) =>
+                new Promise<void>((resolve, reject) =>
                     Promise.resolve(rowData).then(
                         // for cursor version of findAll()
                         (data) =>

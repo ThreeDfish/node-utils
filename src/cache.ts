@@ -70,10 +70,11 @@ example: |
  *  Licensed under the MIT License.
  */
 
-import { RedisClient } from 'redis';
+import { createClient, RedisClientType } from 'redis';
+const RedisClient = createClient();
 
 // for this._redisClient[command]
-export interface ICacheClient extends RedisClient {
+export interface ICacheClient extends RedisClientType {
     [key: string]: any;
 }
 

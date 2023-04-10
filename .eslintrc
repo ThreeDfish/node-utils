@@ -61,11 +61,11 @@
         "padded-blocks": 0
     },
     "env": {
-        "es6": true,
+        "es2021": true,
         "node": true,
         "mocha": true
     },
     "parserOptions": {
-        "ecmaVersion": 8
+        "ecmaVersion": 12
     }
 }

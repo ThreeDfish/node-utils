@@ -5,14 +5,14 @@ keywords:
     - token
     - session token
 dependencies:
-    "@coolgk/cache": "^2"
+    "@threedfish/cache": "^2"
 engines:
     node: ">=8"
 example: |
-    import { Token } from '@coolgk/token';
+    import { Token } from '@threedfish/token';
     import { createClient } from 'redis';
     // OR
-    // const { Token } = require('@coolgk/token');
+    // const { Token } = require('@threedfish/token');
     // const createClient = require('redis').createClient;
 
     (async () => {
@@ -95,7 +95,7 @@ example: |
 // allow a token string (e.g. jwt, uuid) to be manually revoked or renewed
 // (./jwt cannot be renewed or revoked until expired)
 
-import { Cache, ICacheClient } from '@coolgk/cache';
+import { Cache, ICacheClient } from '@threedfish/cache';
 
 export interface IConfig {
     readonly token: string;

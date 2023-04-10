@@ -37,7 +37,7 @@ example: |
  *  Licensed under the MIT License.
  */
 
-import { round } from './number';
+import { round } from './number.js';
 
 /**
  * or use https://www.npmjs.com/package/filesize

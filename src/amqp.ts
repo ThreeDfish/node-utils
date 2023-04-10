@@ -10,11 +10,11 @@ dependencies:
     "amqplib": "^0.5.2"
     "uuid": "^3.1.0"
     "@types/uuid": "^3.4.3"
-    "@coolgk/array": "^2"
+    "@threedfish/array": "^3.1.5"
 example: |
-    import { Amqp } from '@coolgk/amqp';
+    import { Amqp } from '@threedfish/amqp';
     // OR
-    // const { Amqp } = require('@coolgk/amqp');
+    // const { Amqp } = require('@threedfish/amqp');
 
     const amqp = new Amqp({
         url: 'amqp://localhost/vhost'
@@ -64,7 +64,7 @@ example: |
 import { connect, Channel, Connection, Message, Replies, Options } from 'amqplib';
 import { v1 } from 'uuid';
 import { readFile } from 'fs';
-import { toArray } from '@coolgk/array';
+import { toArray } from '@threedfish/array';
 
 export interface IAmqpConfig {
     readonly url: string;
@@ -278,7 +278,7 @@ export class Amqp {
                     (options) => new Promise((resolve, reject) => {
                         readFile(
                             this._sslCa,
-                            (error, sslCA) => error ? reject(error) : {...options, ca: [sslCA]}
+                            (error, sslCA) => error ? reject(error) : {...options as object, ca: [sslCA]}
                         );
                     })
                 ).then(

@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 'use strict';
 
 // export $(cat .env | xargs) && command...

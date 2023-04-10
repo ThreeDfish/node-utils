@@ -9,8 +9,8 @@ keywords:
     - restful session
     - express session
 dependencies:
-    "@coolgk/token": "^2"
-    "@coolgk/jwt": "^2"
+    "@threedfish/token": "^3.1.5"
+    "@threedfishk/jwt": "^3.1.5"
     "cookie": "^0.3.1"
     "@types/cookie": "^0.3.1"
 documentation: |
@@ -20,7 +20,7 @@ documentation: |
     #### Express Middleware Example
     ```javascript
     // express middleware
-    const session = require('@coolgk/session');
+    const session = require('@threedfish/session');
     const app = require('express')();
 
     app.use(
@@ -82,9 +82,9 @@ documentation: |
     ```
     #### Native Node App Example
     ```javascript
-    import { Session } from '@coolgk/session';
+    import { Session } from '@threedfish/session';
     // OR
-    // const { Session } = require('@coolgk/session');
+    // const { Session } = require('@threedfish/session');
 
     const http = require('http');
     http.createServer(async (request, response) => {
@@ -144,8 +144,8 @@ documentation: |
  *  Licensed under the MIT License.
  */
 
-import { Token, IRedisClient, ITokenValues } from '@coolgk/token';
-import { Jwt, IPayload } from '@coolgk/jwt';
+import { Token, IRedisClient, ITokenValues } from '@threedfish/token';
+import { Jwt, IPayload } from '@threedfish/jwt';
 import { CookieSerializeOptions, serialize, parse } from 'cookie';
 import { ServerResponse, IncomingMessage } from 'http';
 
@@ -170,7 +170,7 @@ export const SESSION_NAME = 'session';
 export const COOKIE_NAME = 'accessToken';
 
 /**
- * This class extends @coolgk/token see set(), get(), delete(), getAll() in @coolgk/token
+ * This class extends @threedfish/token see set(), get(), delete(), getAll() in @threedfish/token
  */
 export class Session extends Token {
 

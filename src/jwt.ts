@@ -5,11 +5,11 @@ version: 3.0.1
 keywords:
     - jwt
 dependencies:
-    "@coolgk/base64": "^2"
+    "@threedfish/base64": "^3.1.5"
 example: |
-    import { Jwt } from '@coolgk/jwt';
+    import { Jwt } from '@threedfish/jwt';
     // OR
-    // const { Jwt } = require('@coolgk/jwt');
+    // const { Jwt } = require('@threedfish/jwt');
 
     const jwt = new Jwt({secret: 'abc'});
 
@@ -44,7 +44,7 @@ example: |
 // https://auth0.com/blog/critical-vulnerabilities-in-json-web-token-libraries/
 
 import { createHmac } from 'crypto';
-import { decodeUrl, encodeUrl } from '@coolgk/base64';
+import { decodeUrl, encodeUrl } from '@threedfish/base64';
 
 export interface IJwtOptions {
     secret: string;
@@ -110,12 +110,15 @@ export class Jwt {
             // fail token if expiry date is set and expired or signatures do not match
             return (payload.exp === 0 || payload.exp >= Date.now())
                 && signature === decodeURIComponent(tokenSignature) ? payload : false;
-        } catch (error) {
-            if (error.message.indexOf('JSON') === -1) {
-                throw error;
-            }
-            return false;
-        }
+        } catch (error: unknown) {
+			if (typeof error === 'object' && error !== null && 'message' in error) {
+				const typedError = error as Error;
+				if (typedError.message.indexOf('JSON') === -1) {
+					throw typedError;
+}
+			}
+			return false;
+		}
     }
 }
 
