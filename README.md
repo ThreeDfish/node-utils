@@ -1,10 +1,10 @@
-[![Build Status](https://travis-ci.org/coolgk/node-utils.svg?branch=master)](https://travis-ci.org/coolgk/node-utils) [![dependencies Status](https://david-dm.org/coolgk/node-utils/status.svg)](https://david-dm.org/coolgk/node-utils) [![Coverage Status](https://coveralls.io/repos/github/coolgk/node-utils/badge.svg)](https://coveralls.io/github/coolgk/node-utils) [![Known Vulnerabilities](https://snyk.io/test/github/coolgk/node-utils/badge.svg)](https://snyk.io/test/github/coolgk/node-utils)
+[![Build Status](https://travis-ci.org/threedfish/node-utils.svg?branch=master)](https://travis-ci.org/threedfish/node-utils) [![dependencies Status](https://david-dm.org/threedfish/node-utils/status.svg)](https://david-dm.org/threedfish/node-utils) [![Coverage Status](https://coveralls.io/repos/github/threedfish/node-utils/badge.svg)](https://coveralls.io/github/threedfish/node-utils) [![Known Vulnerabilities](https://snyk.io/test/github/threedfish/node-utils/badge.svg)](https://snyk.io/test/github/threedfish/node-utils)
 
-`npm install @coolgk/utils`
+`npm install @threedfish/utils`
 
-You can install and use the modules below as standalone packages. If you wish to use @coolgk/utils as an all-in-one package, replace @coolgk/[module] with @coolgk/**utils**/[module] in the require() or import statements in the examples below. 
+You can install and use the modules below as standalone packages. If you wish to use @threedfish/utils as an all-in-one package, replace @threedfish/[module] with @threedfish/**utils**/[module] in the require() or import statements in the examples below.
 
-Report bugs here: [https://github.com/coolgk/node-utils/issues](https://github.com/coolgk/node-utils/issues)
+Report bugs here: [https://github.com/threedfish/node-utils/issues](https://github.com/threedfish/node-utils/issues)
 
 Also see:
 
@@ -18,7 +18,7 @@ A simple, lightweight javascript / typescript MxC framework that helps you to cr
 
 - [amqp](#coolgkamqp)
 - [array](#coolgkarray)
-- [bcrypt](#coolgkbcrypt)
+- ~~bcrypt~~ promise wrapper for bcrypt no longer relevant
 - [base64](#coolgkbase64)
 - [cache](#coolgkcache)
 - [captcha](#coolgkcaptcha)
@@ -29,7 +29,7 @@ A simple, lightweight javascript / typescript MxC framework that helps you to cr
 - [google-sign-in](#coolgkgoogle-sign-in)
 - [jwt](#coolgkjwt)
 - [number](#coolgknumber)
-- [pdf](#coolgkpdf)
+- ~~pdf~~ There are other PDF to HTML options available and PhantomJS is depricated
 - [queue](#coolgkqueue)
 - [string](#coolgkstring)
 - [session](#coolgksession)
@@ -92,7 +92,7 @@ amqp.publish(message, ({rawResponseMessage, responseMessage}) => {
 <a name="Amqp"></a>
 
 ## Amqp
-**Kind**: global class  
+**Kind**: global class
 
 * [Amqp](#Amqp)
     * [new Amqp(options)](#new_Amqp_new)
@@ -115,11 +115,11 @@ amqp.publish(message, ({rawResponseMessage, responseMessage}) => {
 <a name="Amqp+closeConnection"></a>
 
 ### amqp.closeConnection() ⇒ <code>void</code>
-**Kind**: instance method of [<code>Amqp</code>](#Amqp)  
+**Kind**: instance method of [<code>Amqp</code>](#Amqp)
 <a name="Amqp+publish"></a>
 
 ### amqp.publish(message, [callback], [options]) ⇒ <code>promise.&lt;Array.&lt;boolean&gt;&gt;</code>
-**Kind**: instance method of [<code>Amqp</code>](#Amqp)  
+**Kind**: instance method of [<code>Amqp</code>](#Amqp)
 
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -132,8 +132,8 @@ amqp.publish(message, ({rawResponseMessage, responseMessage}) => {
 <a name="Amqp+getChannel"></a>
 
 ### amqp.getChannel() ⇒ <code>promise</code>
-**Kind**: instance method of [<code>Amqp</code>](#Amqp)  
-**Returns**: <code>promise</code> - - promise<channel>  
+**Kind**: instance method of [<code>Amqp</code>](#Amqp)
+**Returns**: <code>promise</code> - - promise<channel>
 
 ## @coolgk/array
 a javascript / typescript module
@@ -189,7 +189,7 @@ Promise.all([
 <a name="toArray"></a>
 
 ## toArray(data) ⇒ <code>array</code>
-**Kind**: global function  
+**Kind**: global function
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -198,7 +198,7 @@ Promise.all([
 <a name="Cache+delete"></a>
 
 ### cache.delete(name) ⇒ <code>promise</code>
-**Kind**: instance method of [<code>Cache</code>](#Cache)  
+**Kind**: instance method of [<code>Cache</code>](#Cache)
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -209,8 +209,8 @@ Promise.all([
 ### cache.getSetIfNull(name, callback, [expiry]) ⇒ <code>promise</code>
 get the cached value, if not set, resolve "callback()" and save the value then return it
 
-**Kind**: instance method of [<code>Cache</code>](#Cache)  
-**Returns**: <code>promise</code> - - cached value  
+**Kind**: instance method of [<code>Cache</code>](#Cache)
+**Returns**: <code>promise</code> - - cached value
 
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -221,65 +221,12 @@ get the cached value, if not set, resolve "callback()" and save the value then r
 <a name="Cache+command"></a>
 
 ### cache.command(command, ...params) ⇒ <code>promise</code>
-**Kind**: instance method of [<code>Cache</code>](#Cache)  
+**Kind**: instance method of [<code>Cache</code>](#Cache)
 
 | Param | Type | Description |
 | --- | --- | --- |
 | command | <code>string</code> | redis command to run |
 | ...params | <code>array</code> | params for the command |
-
-
-## @coolgk/bcrypt
-a javascript / typescript module
-
-`npm install @coolgk/bcrypt`
-
-just a promise wrapper
-
-Report bugs here: [https://github.com/coolgk/node-utils/issues](https://github.com/coolgk/node-utils/issues)
-## Examples
-```javascript
-import { encrypt, verify } from '@coolgk/bcrypt';
-// OR
-// const { encrypt, verify } = require('@coolgk/bcrypt');
-
-const password = 'abc123';
-
-encrypt(password).then((hash) => {
-    verify(password, hash).then(console.log); // true
-    verify(password, 'invalidhash').then(console.log, console.error); // Not a valid BCrypt hash.
-    verify('invalidpass', hash).then(console.log); // false
-});
-
-```
-## Functions
-
-<dl>
-<dt><a href="#encrypt">encrypt(value, salt)</a> ⇒ <code>promise.&lt;string&gt;</code></dt>
-<dd></dd>
-<dt><a href="#verify">verify(value, hashedString)</a> ⇒ <code>promise.&lt;boolean&gt;</code></dt>
-<dd></dd>
-</dl>
-
-<a name="encrypt"></a>
-
-## encrypt(value, salt) ⇒ <code>promise.&lt;string&gt;</code>
-**Kind**: global function  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| value | <code>string</code> | string to encrypt |
-| salt | <code>string</code> | salt |
-
-<a name="verify"></a>
-
-## verify(value, hashedString) ⇒ <code>promise.&lt;boolean&gt;</code>
-**Kind**: global function  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| value | <code>string</code> | string to check |
-| hashedString | <code>string</code> | encrypted hash |
 
 
 ## @coolgk/cache
@@ -353,7 +300,7 @@ Promise.all([
 <a name="Cache"></a>
 
 ## Cache
-**Kind**: global class  
+**Kind**: global class
 
 * [Cache](#Cache)
     * [new Cache(options)](#new_Cache_new)
@@ -375,7 +322,7 @@ Promise.all([
 <a name="Cache+set"></a>
 
 ### cache.set(name, value, [expiry]) ⇒ <code>promise</code>
-**Kind**: instance method of [<code>Cache</code>](#Cache)  
+**Kind**: instance method of [<code>Cache</code>](#Cache)
 
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -386,8 +333,8 @@ Promise.all([
 <a name="Cache+get"></a>
 
 ### cache.get(name) ⇒ <code>promise</code>
-**Kind**: instance method of [<code>Cache</code>](#Cache)  
-**Returns**: <code>promise</code> - - cached value  
+**Kind**: instance method of [<code>Cache</code>](#Cache)
+**Returns**: <code>promise</code> - - cached value
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -396,7 +343,7 @@ Promise.all([
 <a name="Cache+delete"></a>
 
 ### cache.delete(name) ⇒ <code>promise</code>
-**Kind**: instance method of [<code>Cache</code>](#Cache)  
+**Kind**: instance method of [<code>Cache</code>](#Cache)
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -407,8 +354,8 @@ Promise.all([
 ### cache.getSetIfNull(name, callback, [expiry]) ⇒ <code>promise</code>
 get the cached value, if not set, resolve "callback()" and save the value then return it
 
-**Kind**: instance method of [<code>Cache</code>](#Cache)  
-**Returns**: <code>promise</code> - - cached value  
+**Kind**: instance method of [<code>Cache</code>](#Cache)
+**Returns**: <code>promise</code> - - cached value
 
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -419,7 +366,7 @@ get the cached value, if not set, resolve "callback()" and save the value then r
 <a name="Cache+command"></a>
 
 ### cache.command(command, ...params) ⇒ <code>promise</code>
-**Kind**: instance method of [<code>Cache</code>](#Cache)  
+**Kind**: instance method of [<code>Cache</code>](#Cache)
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -464,7 +411,7 @@ captcha.verify(captchaResponse).then((response) => {
 <a name="Captcha"></a>
 
 ## Captcha
-**Kind**: global class  
+**Kind**: global class
 
 * [Captcha](#Captcha)
     * [new Captcha(options)](#new_Captcha_new)
@@ -482,7 +429,7 @@ captcha.verify(captchaResponse).then((response) => {
 <a name="Captcha+verify"></a>
 
 ### captcha.verify(response, [remoteip])
-**Kind**: instance method of [<code>Captcha</code>](#Captcha)  
+**Kind**: instance method of [<code>Captcha</code>](#Captcha)
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -541,8 +488,8 @@ email.send({
 <a name="Email"></a>
 
 ## Email
-**Kind**: global class  
-**See**: https://www.npmjs.com/package/emailjs#emailserverconnectoptions  
+**Kind**: global class
+**See**: https://www.npmjs.com/package/emailjs#emailserverconnectoptions
 
 * [Email](#Email)
     * [new Email(options)](#new_Email_new)
@@ -567,8 +514,8 @@ email.send({
 <a name="Email+send"></a>
 
 ### email.send(options, [attachments]) ⇒ <code>promise</code>
-**Kind**: instance method of [<code>Email</code>](#Email)  
-**Returns**: <code>promise</code> - - message sent  
+**Kind**: instance method of [<code>Email</code>](#Email)
+**Returns**: <code>promise</code> - - message sent
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -623,8 +570,8 @@ const validToken = '...';
 <a name="FacebookSignIn"></a>
 
 ## FacebookSignIn
-**Kind**: global class  
-**Export**:   
+**Kind**: global class
+**Export**:
 
 * [FacebookSignIn](#FacebookSignIn)
     * _instance_
@@ -638,8 +585,8 @@ const validToken = '...';
 ### facebookSignIn.verify(token, [fields]) ⇒ <code>Promise.&lt;(false\|object)&gt;</code>
 verify access token from clients and return false or account data
 
-**Kind**: instance method of [<code>FacebookSignIn</code>](#FacebookSignIn)  
-**Returns**: <code>Promise.&lt;(false\|object)&gt;</code> - - false if access token is invalid otherwise returns account data  
+**Kind**: instance method of [<code>FacebookSignIn</code>](#FacebookSignIn)
+**Returns**: <code>Promise.&lt;(false\|object)&gt;</code> - - false if access token is invalid otherwise returns account data
 
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -649,7 +596,7 @@ verify access token from clients and return false or account data
 <a name="FacebookSignIn.FacebookSignIn"></a>
 
 ### FacebookSignIn.FacebookSignIn
-**Kind**: static class of [<code>FacebookSignIn</code>](#FacebookSignIn)  
+**Kind**: static class of [<code>FacebookSignIn</code>](#FacebookSignIn)
 <a name="new_FacebookSignIn.FacebookSignIn_new"></a>
 
 #### new FacebookSignIn(options)
@@ -786,7 +733,7 @@ const validToken = '...';
 <a name="FacebookSignIn"></a>
 
 ## FacebookSignIn
-**Kind**: global class  
+**Kind**: global class
 
 * [FacebookSignIn](#FacebookSignIn)
     * _instance_
@@ -800,8 +747,8 @@ const validToken = '...';
 ### facebookSignIn.verify(token, [fields]) ⇒ <code>Promise.&lt;(false\|object)&gt;</code>
 verify access token from clients and return false or account data
 
-**Kind**: instance method of [<code>FacebookSignIn</code>](#FacebookSignIn)  
-**Returns**: <code>Promise.&lt;(false\|object)&gt;</code> - - false if access token is invalid otherwise returns account data  
+**Kind**: instance method of [<code>FacebookSignIn</code>](#FacebookSignIn)
+**Returns**: <code>Promise.&lt;(false\|object)&gt;</code> - - false if access token is invalid otherwise returns account data
 
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -811,7 +758,7 @@ verify access token from clients and return false or account data
 <a name="FacebookSignIn.FacebookSignIn"></a>
 
 ### FacebookSignIn.FacebookSignIn
-**Kind**: static class of [<code>FacebookSignIn</code>](#FacebookSignIn)  
+**Kind**: static class of [<code>FacebookSignIn</code>](#FacebookSignIn)
 <a name="new_FacebookSignIn.FacebookSignIn_new"></a>
 
 #### new FacebookSignIn(options)
@@ -873,8 +820,8 @@ email.send({
 <a name="Email"></a>
 
 ## Email
-**Kind**: global class  
-**See**: https://www.npmjs.com/package/emailjs#emailserverconnectoptions  
+**Kind**: global class
+**See**: https://www.npmjs.com/package/emailjs#emailserverconnectoptions
 
 * [Email](#Email)
     * [new Email(options)](#new_Email_new)
@@ -899,8 +846,8 @@ email.send({
 <a name="Email+send"></a>
 
 ### email.send(options, [attachments]) ⇒ <code>promise</code>
-**Kind**: instance method of [<code>Email</code>](#Email)  
-**Returns**: <code>promise</code> - - message sent  
+**Kind**: instance method of [<code>Email</code>](#Email)
+**Returns**: <code>promise</code> - - message sent
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -1113,7 +1060,7 @@ const validToken = '...';
 <a name="GoogleSignIn"></a>
 
 ## GoogleSignIn
-**Kind**: global class  
+**Kind**: global class
 
 * [GoogleSignIn](#GoogleSignIn)
     * _instance_
@@ -1125,8 +1072,8 @@ const validToken = '...';
 <a name="GoogleSignIn+verify"></a>
 
 ### googleSignIn.verify(token) ⇒ <code>Promise.&lt;(boolean\|object)&gt;</code>
-**Kind**: instance method of [<code>GoogleSignIn</code>](#GoogleSignIn)  
-**Returns**: <code>Promise.&lt;(boolean\|object)&gt;</code> - - false if id token is invalid otherwise returns account data  
+**Kind**: instance method of [<code>GoogleSignIn</code>](#GoogleSignIn)
+**Returns**: <code>Promise.&lt;(boolean\|object)&gt;</code> - - false if id token is invalid otherwise returns account data
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -1135,7 +1082,7 @@ const validToken = '...';
 <a name="GoogleSignIn.GoogleSignIn"></a>
 
 ### GoogleSignIn.GoogleSignIn
-**Kind**: static class of [<code>GoogleSignIn</code>](#GoogleSignIn)  
+**Kind**: static class of [<code>GoogleSignIn</code>](#GoogleSignIn)
 <a name="new_GoogleSignIn.GoogleSignIn_new"></a>
 
 #### new GoogleSignIn(options)
@@ -1186,7 +1133,7 @@ setTimeout(() => {
 <a name="Jwt"></a>
 
 ## Jwt
-**Kind**: global class  
+**Kind**: global class
 
 * [Jwt](#Jwt)
     * [new Jwt(options)](#new_Jwt_new)
@@ -1205,7 +1152,7 @@ setTimeout(() => {
 <a name="Jwt+generate"></a>
 
 ### jwt.generate(data, [expiry]) ⇒ <code>string</code>
-**Kind**: instance method of [<code>Jwt</code>](#Jwt)  
+**Kind**: instance method of [<code>Jwt</code>](#Jwt)
 
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -1215,8 +1162,8 @@ setTimeout(() => {
 <a name="Jwt+verify"></a>
 
 ### jwt.verify(token) ⇒ <code>boolean</code> \| <code>object</code>
-**Kind**: instance method of [<code>Jwt</code>](#Jwt)  
-**Returns**: <code>boolean</code> \| <code>object</code> - - false or the payload of the token  
+**Kind**: instance method of [<code>Jwt</code>](#Jwt)
+**Returns**: <code>boolean</code> \| <code>object</code> - - false or the payload of the token
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -1246,7 +1193,7 @@ console.log(round(100.958747, 4)); // 100.9587
 <a name="round"></a>
 
 ## round(value, precision) ⇒ <code>number</code>
-**Kind**: global function  
+**Kind**: global function
 
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -1254,71 +1201,6 @@ console.log(round(100.958747, 4)); // 100.9587
 | precision | <code>number</code> | <code>2</code> | precision |
 
 
-## @coolgk/pdf
-a javascript / typescript module
-
-`npm install @coolgk/pdf`
-
-html to PDF module. create PDF files from html string or file.
-
-Report bugs here: [https://github.com/coolgk/node-utils/issues](https://github.com/coolgk/node-utils/issues)
-## Examples
-```javascript
-// for "error while loading shared libraries: libfontconfig.so" run "sudo apt-get -y install libfontconfig"
-
-import { Pdf, Format, Orientation } from '@coolgk/pdf';
-// OR
-// const { Pdf, Format, Orientation } = require('@coolgk/pdf');
-
-const pdf = new Pdf({
-    tmpConfig: { dir: '/tmp/pdf' } // optional
-});
-
-pdf.createFromHtmlFile(
-    '/tmp/test.html',
-    {
-        header: {
-            height: '1cm',
-            contents: "<strong style='color: red'>Page ${pageNumber} of ${numberOfPages} - ${pageNumber}</strong>"
-        },
-        footer: {
-            height: '1cm',
-            contents: 'footer <strong>Page ${pageNumber} of ${numberOfPages}</strong>'
-        },
-        margin: '0.5cm'
-    }
-).then((pdfFile) => {
-    console.log(pdfFile);
-});
-
-const htmlCode = `<!DOCTYPE html><html><head>
-        <title>CCES</title>
-        <style>
-            .pagebreak { page-break-after: always; }
-            h2, h1 { color: red }
-        </style>
-    </head>
-    <body>
-        <div>
-            <h1>page 1</h1>
-            <p>some text <img src='https://dummyimage.com/600x400/3bbda9/f516ae.jpg'></p>
-        </div>
-        <div class="pagebreak"></div>
-        <div>
-            <h2>page 2</h2>
-            <table>
-                <tr>
-                    <td>texgt</td>
-                    <td>text</td>
-                </tr>
-            </table>
-        </div>
-    </body>
-</html>`;
-
-pdf.createFromHtmlString(htmlCode).then((pdfFile) => {
-    console.log(pdfFile);
-});
 
 ```
 
@@ -1465,8 +1347,8 @@ console.log(prepad0(1000, 2)); // 1000
 ## stripTags(a) ⇒ <code>string</code>
 strip html tags e.g. "&lt;h1&gt;header&lt;/h1&gt;&lt;p&gt;message&lt;/p&gt;" becomes "header message"
 
-**Kind**: global function  
-**Returns**: <code>string</code> - - string with tags stripped  
+**Kind**: global function
+**Returns**: <code>string</code> - - string with tags stripped
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -1477,7 +1359,7 @@ strip html tags e.g. "&lt;h1&gt;header&lt;/h1&gt;&lt;p&gt;message&lt;/p&gt;" bec
 ## escapeHtml(value) ⇒ <code>string</code>
 escaping user input e.g. html code in a message box
 
-**Kind**: global function  
+**Kind**: global function
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -1488,7 +1370,7 @@ escaping user input e.g. html code in a message box
 ## unescapeHtml(string) ⇒ <code>string</code>
 unescaping strings escaped by escapeHtml()
 
-**Kind**: global function  
+**Kind**: global function
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -1499,8 +1381,8 @@ unescaping strings escaped by escapeHtml()
 ## prepad0(value, length) ⇒ <code>string</code>
 use padStart instead
 
-**Kind**: global function  
-**See**: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/padStart  
+**Kind**: global function
+**See**: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/padStart
 
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -1643,7 +1525,7 @@ const session = new Session({
 ## Session
 This class extends @coolgk/token see set(), get(), delete(), getAll() in @coolgk/token
 
-**Kind**: global class  
+**Kind**: global class
 
 * [Session](#Session)
     * [.destroy()](#Session+destroy) ⇒ <code>promise</code>
@@ -1654,14 +1536,14 @@ This class extends @coolgk/token see set(), get(), delete(), getAll() in @coolgk
 ### session.destroy() ⇒ <code>promise</code>
 destory the current session
 
-**Kind**: instance method of [<code>Session</code>](#Session)  
+**Kind**: instance method of [<code>Session</code>](#Session)
 <a name="Session+renew"></a>
 
 ### session.renew([expiry]) ⇒ <code>promise</code>
 renew session optionally with a different expiry time
 
-**Kind**: instance method of [<code>Session</code>](#Session)  
-**Returns**: <code>promise</code> - - false if session has not been started or has a invalid token string  
+**Kind**: instance method of [<code>Session</code>](#Session)
+**Returns**: <code>promise</code> - - false if session has not been started or has a invalid token string
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -1703,7 +1585,7 @@ encrypt(password).then((hash) => {
 <a name="encrypt"></a>
 
 ## encrypt(value, salt) ⇒ <code>promise.&lt;string&gt;</code>
-**Kind**: global function  
+**Kind**: global function
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -1713,7 +1595,7 @@ encrypt(password).then((hash) => {
 <a name="verify"></a>
 
 ## verify(value, hashedString) ⇒ <code>promise.&lt;boolean&gt;</code>
-**Kind**: global function  
+**Kind**: global function
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -1759,8 +1641,8 @@ generateTmpName({dir: '/tmp/test'}).then((r) => console.log('name', r));
 <a name="generateFile"></a>
 
 ## generateFile([options]) ⇒ <code>promise</code>
-**Kind**: global function  
-**Returns**: <code>promise</code> - - { path: ..., cleanupCallback: ... } calling cleanupCallback() removes the generated file  
+**Kind**: global function
+**Returns**: <code>promise</code> - - { path: ..., cleanupCallback: ... } calling cleanupCallback() removes the generated file
 
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -1774,8 +1656,8 @@ generateTmpName({dir: '/tmp/test'}).then((r) => console.log('name', r));
 <a name="generateDir"></a>
 
 ## generateDir([options]) ⇒ <code>promise</code>
-**Kind**: global function  
-**Returns**: <code>promise</code> - - { path: ..., cleanupCallback: ... } calling cleanupCallback() removes the generated file  
+**Kind**: global function
+**Returns**: <code>promise</code> - - { path: ..., cleanupCallback: ... } calling cleanupCallback() removes the generated file
 
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -1789,8 +1671,8 @@ generateTmpName({dir: '/tmp/test'}).then((r) => console.log('name', r));
 <a name="generateTmpName"></a>
 
 ## generateTmpName([options]) ⇒ <code>promise</code>
-**Kind**: global function  
-**Returns**: <code>promise</code> - - { path: ... }  
+**Kind**: global function
+**Returns**: <code>promise</code> - - { path: ... }
 
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -1836,8 +1718,8 @@ console.log(getParams(url3, pattern3)); // { id: '123', value: '456' }
 ## getParams(url, pattern) ⇒ <code>object</code>
 a simple function to get params in a url e.g. with url: user/123, pattern: user/:id returns {id: 123}
 
-**Kind**: global function  
-**Returns**: <code>object</code> - - e.g. {userid: 123}  
+**Kind**: global function
+**Returns**: <code>object</code> - - e.g. {userid: 123}
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -1897,8 +1779,8 @@ console.log('365001 days', millisecondsToString(60 * 60 * 24 * 365001 * 1000)); 
 ## bytesToString(value) ⇒ <code>string</code>
 or use https://www.npmjs.com/package/filesize
 
-**Kind**: global function  
-**Returns**: <code>string</code> - value in KB, MB, GB or TB  
+**Kind**: global function
+**Returns**: <code>string</code> - value in KB, MB, GB or TB
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -1907,8 +1789,8 @@ or use https://www.npmjs.com/package/filesize
 <a name="millisecondsToString"></a>
 
 ## millisecondsToString(value) ⇒ <code>string</code>
-**Kind**: global function  
-**Returns**: <code>string</code> - value in second, minute, hour, day, month or year  
+**Kind**: global function
+**Returns**: <code>string</code> - value in second, minute, hour, day, month or year
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -2021,7 +1903,7 @@ import { createClient } from 'redis';
 <a name="Token"></a>
 
 ## Token
-**Kind**: global class  
+**Kind**: global class
 
 * [Token](#Token)
     * [new Token(options)](#new_Token_new)
@@ -2049,7 +1931,7 @@ import { createClient } from 'redis';
 <a name="Token+renew"></a>
 
 ### token.renew([expiry]) ⇒ <code>promise</code>
-**Kind**: instance method of [<code>Token</code>](#Token)  
+**Kind**: instance method of [<code>Token</code>](#Token)
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -2060,7 +1942,7 @@ import { createClient } from 'redis';
 ### token.set(name, value) ⇒ <code>promise</code>
 set a data field value
 
-**Kind**: instance method of [<code>Token</code>](#Token)  
+**Kind**: instance method of [<code>Token</code>](#Token)
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -2072,13 +1954,13 @@ set a data field value
 ### token.verify() ⇒ <code>promise.&lt;boolean&gt;</code>
 verify if token has expired
 
-**Kind**: instance method of [<code>Token</code>](#Token)  
+**Kind**: instance method of [<code>Token</code>](#Token)
 <a name="Token+get"></a>
 
 ### token.get(name) ⇒ <code>promise</code>
 get the value of a data field
 
-**Kind**: instance method of [<code>Token</code>](#Token)  
+**Kind**: instance method of [<code>Token</code>](#Token)
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -2089,13 +1971,13 @@ get the value of a data field
 ### token.destroy() ⇒ <code>promise</code>
 delete the token
 
-**Kind**: instance method of [<code>Token</code>](#Token)  
+**Kind**: instance method of [<code>Token</code>](#Token)
 <a name="Token+delete"></a>
 
 ### token.delete(name) ⇒ <code>promise</code>
 delete a data field in the token
 
-**Kind**: instance method of [<code>Token</code>](#Token)  
+**Kind**: instance method of [<code>Token</code>](#Token)
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -2106,13 +1988,13 @@ delete a data field in the token
 ### token.getAll() ⇒ <code>promise.&lt;{}&gt;</code>
 get the values of all data fields in the token
 
-**Kind**: instance method of [<code>Token</code>](#Token)  
+**Kind**: instance method of [<code>Token</code>](#Token)
 <a name="Token+setToken"></a>
 
 ### token.setToken(token)
 set a new token string
 
-**Kind**: instance method of [<code>Token</code>](#Token)  
+**Kind**: instance method of [<code>Token</code>](#Token)
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -2123,7 +2005,7 @@ set a new token string
 ## TokenError : <code>object</code>
 Error Codes
 
-**Kind**: global constant  
+**Kind**: global constant
 **Properties**
 
 | Name | Type | Description |
@@ -2168,8 +2050,8 @@ console.log(getParams(url3, pattern3)); // { id: '123', value: '456' }
 ## getParams(url, pattern) ⇒ <code>object</code>
 a simple function to get params in a url e.g. with url: user/123, pattern: user/:id returns {id: 123}
 
-**Kind**: global function  
-**Returns**: <code>object</code> - - e.g. {userid: 123}  
+**Kind**: global function
+**Returns**: <code>object</code> - - e.g. {userid: 123}
 
 | Param | Type | Description |
 | --- | --- | --- |
